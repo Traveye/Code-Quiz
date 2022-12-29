@@ -1,0 +1,48 @@
+* {
+    background-color: #77a960;
+    /* border-style: solid; */
+    padding: 10px;
+    
+}
+
+html {
+    height: 100vh;
+    width: 100vw;
+    /* display: flex;
+    flex-wrap: wrap; */
+}
+
+header {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+/* inside header */
+
+.pageTop {
+   display: flex;
+   flex-wrap: wrap;
+   width: 100%;
+   justify-content: space-between;
+    
+}
+
+.timer {
+    width: max-content;
+    
+}
+
+/* quiz section styling */
+
+.questionField {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    
+}
+
+.answerField {
+    display: flex;
+    flex-direction: column;
+}
+
