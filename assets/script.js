@@ -4,6 +4,8 @@ totalTime = 60
 var timeLeft = 60
 var quizDone = false;
 score = 0;
+var i = 0;
+var j = 0;
 
 function countDown () {
     
@@ -31,6 +33,7 @@ const titleEl = document.querySelector(".title")
 const questionEl = document.querySelector(".questions")
 const answerEl = document.querySelector(".answerField")
 const nameEl = document.querySelector(".name")
+const viewHs = document.querySelector(".vhScore")
 var score = 0;
 
 function beginQuiz () {
@@ -38,6 +41,8 @@ function beginQuiz () {
     titleEl.textContent = "Welcome to Code-Quiz!"
     questionEl.textContent = "This quiz will present you with a series of quesitons to test your coding knowledge. Once you click start you will have " + totalTime + " seconds to complete all the quesitons. But be careful! Any wrong answers will subtract 10 seconds from your remaining time! Good luck!"
     answerEl.style.display = "none";
+    i = 0;
+    j = 0;
    
     let btn = document.createElement("button");
     btn.innerHTML = "Start";
@@ -66,8 +71,7 @@ userOptions = [
     ["var", "set", "for", "create"]
 ]
 
-var i = 0
-var j = 0
+
 
 //sets stage for questions / answer options to display 
 function quizGo() {
@@ -139,7 +143,6 @@ function saveName() {
     nameInput = document.createElement('input');
     nameInput.textContent = "";
     nameInput.style.width = '30px';
-    var nameName = nameInput.value;
 
     nameSubmit = document.createElement('button');
     nameSubmit.type = 'submit';
@@ -152,8 +155,8 @@ function saveName() {
     var inputLabel = document.querySelector('label[for="nameInput"]');
     inputLabel.textContent = "You can store your score! Enter your initials here!";
 
-    nameSubmit.addEventListener('submit', highscore)
-    console.log(nameName)
+    nameSubmit.addEventListener('click', highscore)
+    
 }
 
 function highscore() {
@@ -162,24 +165,27 @@ function highscore() {
     questionEl.textContent = "";
     answerEl.innerHTML = "";
     nameEl.innerHTML = "";
+
     // set local stoarge
-    var newName = localStorage.setItem('name', nameInput.value)
-    var newScore = localStorage.setItem('score', score)
+    localStorage.setItem('name', nameInput.value)
+    localStorage.setItem('score', score)
+   
+    var newName = localStorage.getItem('name')
+    var newScore = localStorage.getItem('score')
 
     allNames.push(newName)
     allScores.push(newScore)
 
-    console.log(nameInput.value)
-
-    console.log(newName)
-    console.log(newScore)
     //render local storage arrays 
-    // allNames.forEach((name, index) => {
-    //     var scoreList = document.createElement('div');
-    //     scoreList.textContent = `${name}: ${allScores[index]}`;
-    //     questionEl.appendChild(scoreList);
-    // });
-    // //set button to trigger begin quiz
-
+    allNames.forEach((name, index) => {
+        var scoreList = document.createElement('div');
+        scoreList.textContent = `${name}: ${allScores[index]}`;
+        questionEl.appendChild(scoreList);
+    });
+    //set button to trigger begin quiz
+    var newGame = document.createElement('button')
+    newGame.textContent = "New Game"
+    newGame.addEventListener("click", beginQuiz)
+    answerEl.appendChild(newGame)
 }
 
