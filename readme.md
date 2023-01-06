@@ -18,14 +18,30 @@ Then, I set the opening stage for the quiz, styling the page so that a user woul
 
 ![alt text](./assets/readme/beginning.png)
 
-I created two arrays, one for my questions and on for the potential answers. Using query selectors and `.textcontet` I inserted the first quesion and then used a `forEach` loop to iterate over the response array. This loop generated buttons with an `eventListener` for the corresponding potential responses. 
+I created two arrays, one for my questions and on for the potential answers. Using query selectors and `.textcontet` I inserted the first quesion and then used a `forEach` loop to iterate over the response array. This loop generated buttons with an `eventListener` for the corresponding potential responses. The users selection would trigger the next function to review the answers. Due to the limited questions, I checked for correctness against the correect answer strings, increasing the score if right or decreasing time if wrong. I then sent the user to the next position in the answer array until all questions had been answered. 
+
+![alt text](./assets/readme/questions.png)
+
+Once all questions were completed or if the timer hit zero the game ends and the users score is displayed along with an input field to save the score with the user initials. 
+
+![alt text](./assets/readme/endgame.png)
+
+These values are stored in local storage and pushed to arrays so that they can be displayed once the game is over or the View Highscore button is cliked. 
+
+![alt text](./assets/readme/highscore.png)
+
+Thank you for checking out this project. You can try the quiz here: https://traveye.github.io/Code-Quiz/
 
 ## Instalation
+NA
 
 ## Usage
+NA
 
 ## Credits
+NA
 
 ## License
+MIT
 
 

@@ -36,6 +36,7 @@ const nameEl = document.querySelector(".name")
 const viewHs = document.querySelector(".vhScore")
 var score = 0;
 
+// to review HS 
 viewHs.addEventListener("click", highscore)
 
 function beginQuiz () {
