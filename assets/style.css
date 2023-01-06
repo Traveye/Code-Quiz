@@ -1,5 +1,6 @@
 * {
-    background-color: #77a960;
+    background-color: #D9D1CD;
+    color: #3878B0;
     /* border-style: solid; */
     padding: 10px;
     
@@ -44,5 +45,10 @@ header {
 .answerField {
     display: flex;
     flex-direction: column;
+}
+
+button {
+    border-style: solid;
+    border-color: #3878B0;;
 }
 

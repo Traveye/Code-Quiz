@@ -100,13 +100,17 @@ function makeButtons() {
 function checkAnswer() {
     selection = event.target;
     var userAnswer = selection.getAttribute('data-value');
+    console.log(typeof userAnswer)
     i++;
     j++;
     if (i >= toAsk.length) {
+        if (userAnswer == "If" || "function myFunction()" || "var") {
+            score += 33.34; 
+        }
         endGame()
     }
-    else if (userAnswer === "If" || "function myFunction()" || "var") {
-        score += 33.5;
+    else if (userAnswer == "If" || "function myFunction()" || "var") {
+        score += 33.33;
         quizGo();
     }
     else {
@@ -126,6 +130,7 @@ function endGame() {
     titleEl.textContent = "Quiz Complete!"
     questionEl.textContent = "Your score is below."
     answerEl.innerHTML = ""
+    answerEl.textContent = score
 }
 
 
