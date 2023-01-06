@@ -1,12 +1,9 @@
-
 // Timer Section triggered by beginQuiz function.
-
 const timerEl = document.querySelector(".timer")
 totalTime = 60
 var timeLeft = 60
 var quizDone = false;
 score = 0;
-
 
 function countDown () {
     
@@ -17,7 +14,8 @@ function countDown () {
 
         if(timeLeft === 0){
             clearInterval(timerInterval);
-            //add call to end game
+            timerEl.textContent = "So close but so far!"
+            
         }
 
         if(quizDone === true) {
@@ -25,22 +23,14 @@ function countDown () {
             timerEl.textContent = "Done early I see!"
         }
 
-        
-
-        
-
     }, 1000);
 }
 
-function sendMessage() {
-    timerEl.textContent = "Your time is up!"
-}
-
 // This section styles HTMl for pre quiz content.
-
 const titleEl = document.querySelector(".title")
 const questionEl = document.querySelector(".questions")
 const answerEl = document.querySelector(".answerField")
+const nameEl = document.querySelector(".name")
 var score = 0;
 
 function beginQuiz () {
@@ -59,15 +49,12 @@ function beginQuiz () {
         
     
     }
-    document.querySelector(".questionField").appendChild(btn);
-
-    
+    document.querySelector(".questionField").appendChild(btn); 
 }
 
 beginQuiz();
 
-// action 6 once all answers done or when time runs out - the game ends and score total is rendered
-// action 7 then you can enter you name / score in local storage and restart the game. 
+// below arrays store quesitons and corresponding answer options. 
 
 toAsk = ["Using _______ statement is how you test for a specific condition?", "How do you create a function in JavaScript?", "What JavaScript keyword declares a variable?"]
 
@@ -82,6 +69,7 @@ userOptions = [
 var i = 0
 var j = 0
 
+//sets stage for questions / answer options to display 
 function quizGo() {
     //set display and options for first question
     titleEl.textContent = "Quiz Engaged"
@@ -91,6 +79,7 @@ function quizGo() {
    
 }
 
+//creates buttons w/ event listener for each option in userOptions array.
 function makeButtons() {
     answerEl.innerHTML = "";
     userOptions[j].forEach(option => {
@@ -102,12 +91,11 @@ function makeButtons() {
 });
 
 }
-
+// evaluates user selection for correctness. moves to endGame when toAsk array has been completed.
 function checkAnswer(event) {
     selection = event.target;
     var userAnswer = selection.getAttribute('data-value');
-    console.log(userAnswer)
-    i++;
+    i++; // i and j moves to next question/answers in their respective array. 
     j++;
     if (i >= toAsk.length) {
         if (userAnswer === "var") {
@@ -119,7 +107,6 @@ function checkAnswer(event) {
     else if (userAnswer === "If"|| userAnswer === "function myFunction()") 
     {
         score += 33.33;
-        console.log("wrong")
         quizGo();
         
     }
@@ -130,23 +117,69 @@ function checkAnswer(event) {
         quizGo();
 
     }
-    
-    
 }
 
 function endGame() {
-    console.log("done")
     quizDone = true;
-    titleEl.textContent = "Quiz Complete!"
-    questionEl.textContent = "Your score is below."
-    answerEl.innerHTML = ""
-    answerEl.textContent = score
-    
+    titleEl.textContent = "Quiz Complete!";
+    questionEl.textContent = "Your score is " + score;
+    answerEl.innerHTML = "";
+
+    saveName();
+
 }
 
+var userName = "";
+var allNames = [];
+var allScores = [];
 
 
+function saveName() {
+    // making input section for intials after game w/ submit button and then appending
+    nameInput = document.createElement('input');
+    nameInput.textContent = "";
+    nameInput.style.width = '30px';
+    var nameName = nameInput.value;
 
+    nameSubmit = document.createElement('button');
+    nameSubmit.type = 'submit';
+    nameSubmit.textContent = "Submit";
 
+    nameEl.appendChild(nameInput);
+    nameEl.appendChild(nameSubmit);
+   
+    // Label input
+    var inputLabel = document.querySelector('label[for="nameInput"]');
+    inputLabel.textContent = "You can store your score! Enter your initials here!";
 
+    nameSubmit.addEventListener('submit', highscore)
+    console.log(nameName)
+}
+
+function highscore() {
+    //reset screen look
+    titleEl.textContent = "HighScores"
+    questionEl.textContent = "";
+    answerEl.innerHTML = "";
+    nameEl.innerHTML = "";
+    // set local stoarge
+    var newName = localStorage.setItem('name', nameInput.value)
+    var newScore = localStorage.setItem('score', score)
+
+    allNames.push(newName)
+    allScores.push(newScore)
+
+    console.log(nameInput.value)
+
+    console.log(newName)
+    console.log(newScore)
+    //render local storage arrays 
+    // allNames.forEach((name, index) => {
+    //     var scoreList = document.createElement('div');
+    //     scoreList.textContent = `${name}: ${allScores[index]}`;
+    //     questionEl.appendChild(scoreList);
+    // });
+    // //set button to trigger begin quiz
+
+}
 
