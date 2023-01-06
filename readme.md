@@ -2,9 +2,9 @@
 # Code Quiz
 
 ## Goals
-The purpose of this project was to develop a web API so that a user could take a coding related quiz. This project could use HTML and CSS but the intention was to primarily rely on JavaScritp without the use of external libraries. The game would be considered complete once the following criteria were met.
+The purpose of this project was to develop a web API so that a user could take a coding related quiz. This project could use HTML and CSS but the intention was to primarily rely on JavaScript without the use of external libraries. The game would be considered complete once the following criteria were met.
 
-- A start button is used to beging the quiz which will display a question as well as start a timer. 
+- A start button is used to begin the quiz which will display a question as well as start a timer. 
 - Once a question is answered, then another will be presented.
 - If a question is answered incorrectly, a time penalty will be assesed. 
 - When the timer ends or the quiz is complete, the game will end.
