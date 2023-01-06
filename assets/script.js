@@ -17,9 +17,15 @@ function countDown () {
 
         if(timeLeft === 0){
             clearInterval(timerInterval);
-            sendMessage();
             //add call to end game
         }
+
+        if(quizDone === true) {
+            clearInterval(timerInterval);
+            timerEl.textContent = "Done early I see!"
+        }
+
+        
 
         
 
@@ -97,26 +103,30 @@ function makeButtons() {
 
 }
 
-function checkAnswer() {
+function checkAnswer(event) {
     selection = event.target;
     var userAnswer = selection.getAttribute('data-value');
-    console.log(typeof userAnswer)
+    console.log(userAnswer)
     i++;
     j++;
     if (i >= toAsk.length) {
-        if (userAnswer == "If" || "function myFunction()" || "var") {
+        if (userAnswer === "var") {
             score += 33.34; 
+            
         }
         endGame()
     }
-    else if (userAnswer == "If" || "function myFunction()" || "var") {
+    else if (userAnswer === "If"|| userAnswer === "function myFunction()") 
+    {
         score += 33.33;
+        console.log("wrong")
         quizGo();
+        
     }
+
     else {
         timeLeft -= 10;
         timerEl.textContent = timeLeft;
-
         quizGo();
 
     }
@@ -131,6 +141,7 @@ function endGame() {
     questionEl.textContent = "Your score is below."
     answerEl.innerHTML = ""
     answerEl.textContent = score
+    
 }
 
 
