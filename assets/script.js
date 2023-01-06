@@ -36,13 +36,20 @@ const nameEl = document.querySelector(".name")
 const viewHs = document.querySelector(".vhScore")
 var score = 0;
 
+viewHs.addEventListener("click", highscore)
+
 function beginQuiz () {
     timerEl.textContent = "You will have " + totalTime + " seconds"
     titleEl.textContent = "Welcome to Code-Quiz!"
     questionEl.textContent = "This quiz will present you with a series of quesitons to test your coding knowledge. Once you click start you will have " + totalTime + " seconds to complete all the quesitons. But be careful! Any wrong answers will subtract 10 seconds from your remaining time! Good luck!"
     answerEl.style.display = "none";
+    //resetting for new game
     i = 0;
     j = 0;
+    score = 0;
+    timeLeft = 60;
+    quizDone = false;
+    //
    
     let btn = document.createElement("button");
     btn.innerHTML = "Start";
@@ -144,16 +151,17 @@ function saveName() {
     nameInput.textContent = "";
     nameInput.style.width = '30px';
 
+    nameLabel = document.createElement('label');
+    nameLabel.textContent = "You can store your score! Enter your initials here!"
+
     nameSubmit = document.createElement('button');
     nameSubmit.type = 'submit';
     nameSubmit.textContent = "Submit";
 
     nameEl.appendChild(nameInput);
     nameEl.appendChild(nameSubmit);
-   
-    // Label input
-    var inputLabel = document.querySelector('label[for="nameInput"]');
-    inputLabel.textContent = "You can store your score! Enter your initials here!";
+    nameEl.appendChild(nameLabel);
+
 
     nameSubmit.addEventListener('click', highscore)
     
