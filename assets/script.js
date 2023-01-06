@@ -4,7 +4,8 @@
 const timerEl = document.querySelector(".timer")
 totalTime = 60
 var timeLeft = 60
-const quizDone = false;
+var quizDone = false;
+score = 0;
 
 
 function countDown () {
@@ -69,7 +70,7 @@ userOptions = [
 
     ["function:myFunction()", "function myFunction()", "function = myFunction()", "function is myFunction()"],
 
-    ["var", "if", "for", "create"]
+    ["var", "set", "for", "create"]
 ]
 
 var i = 0
@@ -80,21 +81,51 @@ function quizGo() {
     titleEl.textContent = "Quiz Engaged"
     answerEl.style.display = "flex"
     questionEl.textContent = toAsk[i];
+    makeButtons();
+   
+}
+
+function makeButtons() {
+    answerEl.innerHTML = "";
     userOptions[j].forEach(option => {
         const button = document.createElement('button');
         button.textContent = option;
         button.setAttribute('data-value', option);
         button.addEventListener("click", checkAnswer)
         answerEl.appendChild(button);
-      });
+});
+
 }
 
 function checkAnswer() {
-    console.log("hey")
+    selection = event.target;
+    var userAnswer = selection.getAttribute('data-value');
     i++;
     j++;
-    quizGo();
+    if (i >= toAsk.length) {
+        endGame()
+    }
+    else if (userAnswer === "If" || "function myFunction()" || "var") {
+        score += 33.5;
+        quizGo();
+    }
+    else {
+        timeLeft -= 10;
+        timerEl.textContent = timeLeft;
+
+        quizGo();
+
+    }
     
+    
+}
+
+function endGame() {
+    console.log("done")
+    quizDone = true;
+    titleEl.textContent = "Quiz Complete!"
+    questionEl.textContent = "Your score is below."
+    answerEl.innerHTML = ""
 }
 
 
